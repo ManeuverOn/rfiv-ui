@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 export const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar>
       <Navbar.Brand href="#">
         <img
           alt="logo"
@@ -17,7 +17,9 @@ export const Header = () => {
         />{" "}
         RFIV
       </Navbar.Brand>
-      <Nav.Link>Home</Nav.Link>
+      <Nav.Link>Search</Nav.Link>
+      <Nav.Link>Add</Nav.Link>
+      <Nav.Link>Update</Nav.Link>
     </Navbar>
   );
 };
