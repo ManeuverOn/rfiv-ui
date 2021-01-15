@@ -25,3 +25,8 @@
 .center-text {
   width: 100vh;
 }
+
+.spaced-link {
+  display: block;
+  padding: .5rem 1rem;
+}
