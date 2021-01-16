@@ -3,11 +3,11 @@ import "../css/App.css";
 export const Update = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="center-text">
+      <div className="background">
+        <div className="large-text">
           Welcome to the Update Page
         </div>
-      </header>
+      </div>
     </div>
   );
 };
