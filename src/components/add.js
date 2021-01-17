@@ -21,10 +21,10 @@ export const Add = () => {
         headers: {
           "content-type": "application/json",
         },
-      })
+      });
       const data = await res.json();
       if (res.ok) {
-        console.log("Successfully added patient.")
+        console.log("Successfully added patient.");
         console.log(data);
         setState({ name: "", id: "", tagId: "" });
         setValidated(false);
@@ -33,7 +33,7 @@ export const Add = () => {
         setValidated(true);
       }
     } else {
-      console.log("Invalid entry.")
+      console.log("Invalid entry.");
       setValidated(true);
     }
   };
@@ -42,9 +42,7 @@ export const Add = () => {
     <div className="App">
       <div className="background">
         <div className="content-box">
-          <strong>Add a patient:</strong>
-          <br />
-          <br />
+          <p className="strong-label">Add a patient:</p>
           <Form noValidate validated={validated} onSubmit={onSubmit}>
             <Form.Group>
               <Form.Label>Name</Form.Label>

@@ -23,9 +23,6 @@ export const Header = () => {
       <Link className="spaced-link" to="/add">
         Add
       </Link>
-      <Link className="spaced-link" to="/update">
-        Update
-      </Link>
     </Navbar>
   );
 };

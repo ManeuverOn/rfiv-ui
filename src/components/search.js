@@ -6,7 +6,7 @@ export const Search = () => {
     <div className="App">
       <div className="background">
         <div className="content-box">
-          Search for a patient:
+          <p className="strong-label">Search for a patient:</p>
           <Form>
             <div key="default-radio" className="mb-3">
               <Form.Check
