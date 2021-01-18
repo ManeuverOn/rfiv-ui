@@ -20,7 +20,7 @@ export const Search = ({ history }) => {
     ev.preventDefault();
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
       const res = await fetch(
-        `http://localhost:8080/v1/patient?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
+        `http://localhost:8080/v1/patients?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
       );
       const data = await res.json();
       if (res.ok) {
@@ -38,7 +38,7 @@ export const Search = ({ history }) => {
   };
 
   const handleClick = (name, id, tagId) => {
-    history.push(`/patient?name=${name}&id=${id}&tagId=${tagId}`);
+    history.push(`/patient/${id}`);
   };
 
   const ResultsTable = ({ results }) => {

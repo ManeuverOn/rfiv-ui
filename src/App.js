@@ -14,7 +14,7 @@ export const App = () => {
       <Route exact path="/" component={Landing} />
       <Route path="/search" component={Search} />
       <Route path="/add" component={Add} />
-      <Route path="/patient" component={Patient} />
+      <Route path="/patient/:id" component={Patient} />
     </BrowserRouter>
   );
 };
