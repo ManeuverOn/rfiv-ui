@@ -8,11 +8,11 @@ export const Add = () => {
   let [validated, setValidated] = useState(false);
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
 
-  const onChange = (ev) => {
+  const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
   };
 
-  const onSubmit = async (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
     if (ev.currentTarget.checkValidity()) {
       const res = await fetch("http://localhost:8080/v1/patient", {
@@ -42,8 +42,8 @@ export const Add = () => {
     <div className="App">
       <div className="background">
         <div className="content-box">
-          <p className="strong-label">Add a patient:</p>
-          <Form noValidate validated={validated} onSubmit={onSubmit}>
+          <p className="big-label">Add a patient:</p>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -52,7 +52,7 @@ export const Add = () => {
                 placeholder="Name"
                 name="name"
                 value={state.name}
-                onChange={onChange}
+                onChange={handleChange}
               />
               <Form.Control.Feedback type="invalid">
                 Please provide the patient's name.
@@ -66,7 +66,7 @@ export const Add = () => {
                 placeholder="Patient ID"
                 name="id"
                 value={state.id}
-                onChange={onChange}
+                onChange={handleChange}
               />
               <Form.Control.Feedback type="invalid">
                 Please provide the patient's ID.
@@ -79,7 +79,7 @@ export const Add = () => {
                 placeholder="Tag ID"
                 name="tagId"
                 value={state.tagId}
-                onChange={onChange}
+                onChange={handleChange}
               />
             </Form.Group>
             <Button type="submit">Submit</Button>
