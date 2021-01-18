@@ -6,7 +6,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export const Patient = ({ match }) => {
-  let [state, setState] = useState({ name: "", id: "", tagId: "" });
+  let [state, setState] = useState({
+    name: "",
+    id: "",
+    tagId: "",
+    locations: [],
+  });
 
   useEffect(() => {
     const getPatient = async () => {
@@ -15,7 +20,12 @@ export const Patient = ({ match }) => {
       );
       const data = await res.json();
       if (res.ok) {
-        setState({ name: data.name, id: data.id, tagId: data.tagId });
+        setState({
+          name: data.name,
+          id: data.id,
+          tagId: data.tagId,
+          locations: data.locations,
+        });
       } else {
         console.log(data.error);
       }
@@ -24,6 +34,13 @@ export const Patient = ({ match }) => {
   }, [match.params.id]);
 
   const PatientInfo = ({ info }) => {
+    const locations = info.locations;
+    let lastLocation = "";
+    if (locations.length > 0) {
+      const lastEntry = locations[locations.length - 1];
+      lastLocation = lastEntry[1] + " at " + lastEntry[0];
+    }
+
     return (
       <Container className="patient-box">
         <Row>
@@ -37,6 +54,10 @@ export const Patient = ({ match }) => {
         <Row>
           <Col>Tag ID</Col>
           <Col>{info.tagId}</Col>
+        </Row>
+        <Row>
+          <Col>Patient's Last Location</Col>
+          <Col>{lastLocation}</Col>
         </Row>
       </Container>
     );
