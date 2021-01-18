@@ -51,6 +51,14 @@
   color: green;
 }
 
+.result {
+  min-height: 10vh;
+  min-width: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .results-box {
   color: black;
   border-color: black;

@@ -8,7 +8,7 @@ export const Search = () => {
   let [invalid, setInvalid] = useState(false);
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   let [errorMsg, setErrorMsg] = useState("");
-  let [results, setResults] = useState([]);
+  let [patientList, setPatientList] = useState([]);
 
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
@@ -24,7 +24,7 @@ export const Search = () => {
       const data = await res.json();
       if (res.ok) {
         setErrorMsg("");
-        console.log(data);
+        setPatientList(data);
       } else {
         setErrorMsg(data.error);
       }
@@ -32,6 +32,17 @@ export const Search = () => {
       setErrorMsg("");
       setInvalid(true);
     }
+  };
+
+  const ResultsBox = ({ results }) => {
+    const resBox = results.map((r, i) => {
+      return (
+        <div key={i} className="result">
+          {"Name: " + r.name + " ID: " + r.id + " Tag ID: " + r.tagId}
+        </div>
+      );
+    });
+    return <div className="results-box">{resBox}</div>;
   };
 
   return (
@@ -88,9 +99,7 @@ export const Search = () => {
           </Form>
           <div className="error-message">{errorMsg}</div>
         </div>
-        <div className="results-box">
-
-        </div>
+        <ResultsBox results={patientList} />
       </div>
     </div>
   );
