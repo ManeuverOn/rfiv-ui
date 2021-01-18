@@ -3,8 +3,9 @@ import "../css/App.css";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
-export const Search = () => {
+export const Search = ({ history }) => {
   let [invalid, setInvalid] = useState(false);
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   let [errorMsg, setErrorMsg] = useState("");
@@ -26,23 +27,48 @@ export const Search = () => {
         setErrorMsg("");
         setPatientList(data);
       } else {
+        setPatientList([]);
         setErrorMsg(data.error);
       }
     } else {
+      setPatientList([]);
       setErrorMsg("");
       setInvalid(true);
     }
   };
 
-  const ResultsBox = ({ results }) => {
-    const resBox = results.map((r, i) => {
+  const handleClick = (name, id, tagId) => {
+    history.push(`/patient?name=${name}&id=${id}&tagId=${tagId}`);
+  };
+
+  const ResultsTable = ({ results }) => {
+    const resultEntry = results.map((r, i) => {
       return (
-        <div key={i} className="result">
-          {"Name: " + r.name + " ID: " + r.id + " Tag ID: " + r.tagId}
-        </div>
+        <tr
+          key={i}
+          role="button"
+          onClick={() => handleClick(r.name, r.id, r.tagId)}
+        >
+          <td>{r.name}</td>
+          <td>{r.id}</td>
+          <td>{r.tagId}</td>
+        </tr>
       );
     });
-    return <div className="results-box">{resBox}</div>;
+    return (
+      <div className="table-box">
+        <Table hidden={results.length === 0} striped bordered hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th>Tag ID</th>
+            </tr>
+          </thead>
+          <tbody>{resultEntry}</tbody>
+        </Table>
+      </div>
+    );
   };
 
   return (
@@ -99,7 +125,7 @@ export const Search = () => {
           </Form>
           <div className="error-message">{errorMsg}</div>
         </div>
-        <ResultsBox results={patientList} />
+        <ResultsTable results={patientList} />
       </div>
     </div>
   );

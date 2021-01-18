@@ -5,6 +5,7 @@ import { Header } from "./components/header";
 import { Landing } from "./components/landing";
 import { Search } from "./components/search";
 import { Add } from "./components/add";
+import { Patient } from "./components/patient";
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <Route exact path="/" component={Landing} />
       <Route path="/search" component={Search} />
       <Route path="/add" component={Add} />
+      <Route path="/patient" component={Patient} />
     </BrowserRouter>
   );
 };
