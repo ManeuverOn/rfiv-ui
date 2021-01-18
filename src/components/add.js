@@ -56,6 +56,7 @@ export const Add = () => {
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
+                autoFocus
                 required
                 type="text"
                 placeholder="Name"

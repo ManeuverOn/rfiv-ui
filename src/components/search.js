@@ -90,6 +90,7 @@ export const Search = ({ history }) => {
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
+                autoFocus
                 isInvalid={invalid}
                 type="text"
                 placeholder="Name"
