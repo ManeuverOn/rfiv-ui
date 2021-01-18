@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 export const Add = () => {
   let [validated, setValidated] = useState(false);
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
+  let [errorMsg, setErrorMsg] = useState("");
+  let [successMsg, setSuccessMsg] = useState("");
 
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
@@ -24,16 +26,18 @@ export const Add = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        console.log("Successfully added patient.");
-        console.log(data);
+        setErrorMsg("");
+        setSuccessMsg("Successfully added patient.");
         setState({ name: "", id: "", tagId: "" });
         setValidated(false);
       } else {
-        console.log(data.error);
+        setErrorMsg(data.error);
+        setSuccessMsg("");
         setValidated(true);
       }
     } else {
-      console.log("Invalid entry.");
+      setErrorMsg("Invalid entry.");
+      setSuccessMsg("");
       setValidated(true);
     }
   };
@@ -84,6 +88,8 @@ export const Add = () => {
             </Form.Group>
             <Button type="submit">Submit</Button>
           </Form>
+          <div className="error-message">{errorMsg}</div>
+          <div className="success-message">{successMsg}</div>
         </div>
       </div>
     </div>

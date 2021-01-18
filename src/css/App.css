@@ -40,3 +40,13 @@
 .big-label {
   font-size: calc(5px + 2vmin);
 }
+
+.error-message {
+  padding-top: 0.5rem;
+  color: red;
+}
+
+.success-message {
+  padding-top: 0.5rem;
+  color: green;
+}
