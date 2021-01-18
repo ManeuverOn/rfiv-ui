@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 export const Search = () => {
   let [invalid, setInvalid] = useState(false);
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
+  let [errorMsg, setErrorMsg] = useState("");
+  let [results, setResults] = useState([]);
 
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
@@ -21,12 +23,13 @@ export const Search = () => {
       );
       const data = await res.json();
       if (res.ok) {
+        setErrorMsg("");
         console.log(data);
       } else {
-        console.log(data.error);
+        setErrorMsg(data.error);
       }
     } else {
-      console.log("Invalid entry.");
+      setErrorMsg("");
       setInvalid(true);
     }
   };
@@ -34,7 +37,7 @@ export const Search = () => {
   return (
     <div className="App">
       <div className="background">
-        <div className="content-box">
+        <div className="form-box">
           <p className="big-label">
             Search for a patient by one or more fields:
           </p>
@@ -83,6 +86,10 @@ export const Search = () => {
             </Form.Group>
             <Button type="submit">Submit</Button>
           </Form>
+          <div className="error-message">{errorMsg}</div>
+        </div>
+        <div className="results-box">
+
         </div>
       </div>
     </div>

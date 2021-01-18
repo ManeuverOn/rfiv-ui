@@ -31,7 +31,7 @@
   padding: 0.5rem 1rem;
 }
 
-.content-box {
+.form-box {
   color: black;
   min-height: 50vh;
   min-width: 50vh;
@@ -49,4 +49,10 @@
 .success-message {
   padding-top: 0.5rem;
   color: green;
+}
+
+.results-box {
+  color: black;
+  border-color: black;
+  background: white;
 }

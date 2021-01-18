@@ -29,14 +29,13 @@ export const Add = () => {
         setErrorMsg("");
         setSuccessMsg("Successfully added patient.");
         setState({ name: "", id: "", tagId: "" });
-        setValidated(false);
       } else {
         setErrorMsg(data.error);
         setSuccessMsg("");
-        setValidated(true);
       }
+      setValidated(false);
     } else {
-      setErrorMsg("Invalid entry.");
+      setErrorMsg("");
       setSuccessMsg("");
       setValidated(true);
     }
@@ -45,7 +44,7 @@ export const Add = () => {
   return (
     <div className="App">
       <div className="background">
-        <div className="content-box">
+        <div className="form-box">
           <p className="big-label">Add a patient:</p>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group>
