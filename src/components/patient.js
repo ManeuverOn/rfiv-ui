@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export const Patient = ({ match }) => {
+  // save user's search query
   let [state, setState] = useState({
     name: "",
     id: "",
@@ -13,6 +14,7 @@ export const Patient = ({ match }) => {
     locations: [],
   });
 
+  // load information of patient with corresponding ID
   useEffect(() => {
     const getPatient = async () => {
       const res = await fetch(
@@ -33,6 +35,7 @@ export const Patient = ({ match }) => {
     getPatient();
   }, [match.params.id]);
 
+  // display patient's info
   const PatientInfo = ({ info }) => {
     const locations = info.locations;
     let lastLocation = "";

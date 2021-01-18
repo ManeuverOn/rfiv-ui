@@ -5,15 +5,21 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export const Add = () => {
+  // notify user of invalid input
   let [validated, setValidated] = useState(false);
+  // save user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
+  // error status of adding patient
   let [errorMsg, setErrorMsg] = useState("");
+  // success status of adding patient
   let [successMsg, setSuccessMsg] = useState("");
 
+  // save user's form input
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
   };
 
+  // try to add patient to database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     if (ev.currentTarget.checkValidity()) {

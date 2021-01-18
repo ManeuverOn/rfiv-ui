@@ -6,16 +6,22 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 export const Search = ({ history }) => {
+  // notify user of invalid input
   let [invalid, setInvalid] = useState(false);
+  // save user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
+  // error status of searching for patient
   let [errorMsg, setErrorMsg] = useState("");
+  // save patient list from search results
   let [patientList, setPatientList] = useState([]);
 
+  // save user's form input
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
     setInvalid(false);
   };
 
+  // search for patients in database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
@@ -27,8 +33,8 @@ export const Search = ({ history }) => {
         setErrorMsg("");
         setPatientList(data);
       } else {
-        setPatientList([]);
         setErrorMsg(data.error);
+        setPatientList([]);
       }
     } else {
       setPatientList([]);
@@ -37,10 +43,12 @@ export const Search = ({ history }) => {
     }
   };
 
+  // go to patient's info page from search results
   const handleClick = (name, id, tagId) => {
     history.push(`/patient/${id}`);
   };
 
+  // display patient list
   const ResultsTable = ({ results }) => {
     const resultEntry = results.map((r, i) => {
       return (
