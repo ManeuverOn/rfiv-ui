@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# rfiv-ui
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -17,5 +17,6 @@ Installs the necessary packages.
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Interaction with the Server
+
+This code serves as the frontend for the RFIV tracking app. The server logic that handles database transactions is located in the [rfiv-server repository](https://github.com/dj4zhang/rfiv-server). Both `rfiv-ui` and `rfiv-server` must be running for the whole application to work.
