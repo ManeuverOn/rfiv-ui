@@ -83,7 +83,7 @@ export const Add = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Tag ID (Optional)</Form.Label>
+              <Form.Label>Tag ID</Form.Label>
               <Form.Control
                 required
                 type="text"
