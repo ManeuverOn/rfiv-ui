@@ -85,12 +85,16 @@ export const Add = () => {
             <Form.Group>
               <Form.Label>Tag ID (Optional)</Form.Label>
               <Form.Control
+                required
                 type="text"
                 placeholder="Tag ID"
                 name="tagId"
                 value={state.tagId}
                 onChange={handleChange}
               />
+              <Form.Control.Feedback type="invalid">
+                Please provide the tag ID.
+              </Form.Control.Feedback>
             </Form.Group>
             <Button type="submit">Submit</Button>
           </Form>
