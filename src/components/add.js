@@ -30,12 +30,12 @@ export const Add = () => {
           "content-type": "application/json",
         },
       });
-      const data = await res.json();
       if (res.ok) {
         setErrorMsg("");
         setSuccessMsg("Successfully added patient.");
         setState({ name: "", id: "", tagId: "" });
       } else {
+        const data = await res.json();
         setErrorMsg(data.error);
         setSuccessMsg("");
       }
