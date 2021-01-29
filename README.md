@@ -19,4 +19,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Interaction with the Server
 
-This code serves as the frontend for the RFIV tracking app. The server logic that handles database transactions is located in the [rfiv-server repository](https://github.com/dj4zhang/rfiv-server). Both `rfiv-ui` and `rfiv-server` must be running for the whole application to work.
+This code serves as the frontend for the RFIV tracking app. The server logic that handles database transactions is located in the [rfiv-server repository](https://github.com/ManeuverOn/rfiv-server). Both `rfiv-ui` and `rfiv-server` must be running for the whole application to work.
