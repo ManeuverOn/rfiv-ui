@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 
 export const Header = () => {
+  // return header bar with navigation links
   return (
     <Navbar bg="dark" variant="dark">
       <Link className="logo-link" to="/">

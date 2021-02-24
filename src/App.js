@@ -8,6 +8,7 @@ import { Add } from "./components/add";
 import { Patient } from "./components/patient";
 
 export const App = () => {
+  // loads the header bar and the component requested for according to the URL
   return (
     <BrowserRouter>
       <Header />

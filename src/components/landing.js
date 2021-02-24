@@ -1,6 +1,7 @@
 import logo from "../images/rfiv.svg";
 import "../css/App.css";
 
+// return the landing page which gives a brief introduction to the app
 export const Landing = () => {
   return (
     <div className="App">

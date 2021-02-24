@@ -15,42 +15,46 @@ export const Search = ({ history }) => {
   // save patient list from search results
   let [patientList, setPatientList] = useState([]);
 
-  // save user's form input
+  // handles saving changes on form input
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
     setInvalid(false);
   };
 
-  // search for patients in database
+  // handles search for patients in database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
+    // make sure at least one field is non-empty
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
       const res = await fetch(
         `http://localhost:8080/v1/patients?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
       );
       const data = await res.json();
       if (res.ok) {
+        // patient found
         setErrorMsg("");
         setPatientList(data);
       } else {
+        // error when searching for patient
         setErrorMsg(data.error);
         setPatientList([]);
       }
     } else {
+      // all fields empty
       setPatientList([]);
       setErrorMsg("");
       setInvalid(true);
     }
   };
 
-  // go to patient's info page from search results
+  // handles click to to patient's info page from search results
   const handleClick = (name, id, tagId) => {
     history.push(`/patient/${id}`);
   };
 
-  // display patient list
+  // component for displaying patient list
   const ResultsTable = ({ results }) => {
-    const resultEntry = results.map((r, i) => {
+    const resTable = results.map((r, i) => {
       return (
         <tr
           key={i}
@@ -73,12 +77,13 @@ export const Search = ({ history }) => {
               <th>Tag ID</th>
             </tr>
           </thead>
-          <tbody>{resultEntry}</tbody>
+          <tbody>{resTable}</tbody>
         </Table>
       </div>
     );
   };
 
+  // returns the form used for searching for a patient
   return (
     <div className="App">
       <div className="background">

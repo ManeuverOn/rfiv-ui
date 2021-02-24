@@ -14,14 +14,15 @@ export const Add = () => {
   // success status of adding patient
   let [successMsg, setSuccessMsg] = useState("");
 
-  // save user's form input
+  // handles saving changes on form input
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
   };
 
-  // try to add patient to database
+  // handle submitting form to add patient to database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
+    // check that all fields are non-empty
     if (ev.currentTarget.checkValidity()) {
       const res = await fetch("http://localhost:8080/v1/patient", {
         method: "POST",
@@ -31,22 +32,26 @@ export const Add = () => {
         },
       });
       if (res.ok) {
+        // successfully added patient
         setErrorMsg("");
         setSuccessMsg("Successfully added patient.");
         setState({ name: "", id: "", tagId: "" });
       } else {
+        // failure in adding patient
         const data = await res.json();
         setErrorMsg(data.error);
         setSuccessMsg("");
       }
       setValidated(false);
     } else {
+      // at least one field was empty
       setErrorMsg("");
       setSuccessMsg("");
       setValidated(true);
     }
   };
 
+  // return form for adding new patient to database
   return (
     <div className="App">
       <div className="background">
