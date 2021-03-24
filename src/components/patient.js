@@ -1,10 +1,12 @@
 import "../css/App.css";
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import { SyncIcon } from "@primer/octicons-react";
 
 export const Patient = ({ match }) => {
   // patient info
@@ -17,26 +19,41 @@ export const Patient = ({ match }) => {
   // patient location history
   let [locations, setLocations] = useState([]);
 
-  // load information and locations of patient with the ID provided in the URL
+  // get information and locations of patient with the ID provided in the URL
+  const getPatient = async () => {
+    const res = await fetch(
+      `http://localhost:8080/v1/patient/${match.params.id}`
+    );
+    const data = await res.json();
+    if (res.ok) {
+      setState({
+        name: data.name,
+        id: data.id,
+        tagId: data.tagId,
+      });
+      setLocations(data.locations);
+    } else {
+      console.log(data.error);
+    }
+  };
+
+  // get patient information when page loads
   useEffect(() => {
-    const getPatient = async () => {
-      const res = await fetch(
-        `http://localhost:8080/v1/patient/${match.params.id}`
-      );
-      const data = await res.json();
-      if (res.ok) {
-        setState({
-          name: data.name,
-          id: data.id,
-          tagId: data.tagId,
-        });
-        setLocations(data.locations);
-      } else {
-        console.log(data.error);
-      }
-    };
     getPatient();
-  }, [match.params.id]);
+  }, []);
+
+  // Icon for refreshing info on page
+  const RefreshIcon = () => {
+    return (
+      <div className="refresh-icon">
+        <Row className="justify-content-md-center">
+          <Link to={`/patient/${match.params.id}`} onClick={getPatient}>
+            <SyncIcon size="24px" />
+          </Link>
+        </Row>
+      </div>
+    );
+  };
 
   // component for displaying patient's info
   const PatientInfo = ({ info, locHistory }) => {
@@ -47,23 +64,27 @@ export const Patient = ({ match }) => {
     }
 
     return (
-      <Container className="patient-box">
-        <Row>
-          <Col>Name</Col>
-          <Col>{info.name}</Col>
-        </Row>
-        <Row>
-          <Col>ID</Col>
-          <Col>{info.id}</Col>
-        </Row>
-        <Row>
-          <Col>Tag ID</Col>
-          <Col>{info.tagId}</Col>
-        </Row>
-        <Row>
-          <Col>Patient's Last Location</Col>
-          <Col>{lastLocation}</Col>
-        </Row>
+      <Container>
+        <Table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td>{info.name}</td>
+            </tr>
+            <tr>
+              <td>ID</td>
+              <td>{info.id}</td>
+            </tr>
+            <tr>
+              <td>Tag ID</td>
+              <td>{info.tagId}</td>
+            </tr>
+            <tr>
+              <td>Patient's Last Location</td>
+              <td>{lastLocation}</td>
+            </tr>
+          </tbody>
+        </Table>
       </Container>
     );
   };
@@ -82,7 +103,7 @@ export const Patient = ({ match }) => {
 
     return (
       <div className="table-box">
-        <Table hidden={locTable.length === 0} striped bordered hover>
+        <Table hidden={locTable.length === 0} size="sm" striped bordered hover>
           <thead>
             <tr>
               <th>Time</th>
@@ -99,6 +120,7 @@ export const Patient = ({ match }) => {
   return (
     <div className="App">
       <div className="background">
+        <RefreshIcon />
         <PatientInfo info={state} locHistory={locations} />
         <LocationTable locHistory={locations} />
       </div>

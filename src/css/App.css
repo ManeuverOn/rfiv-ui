@@ -53,14 +53,12 @@
 }
 
 .table-box {
-  margin-top: 5vh;
-  height: 50vh;
+  margin-top: 3vh;
+  height: 75vh;
   overflow: auto;
   min-width: 80vh;
 }
 
-.patient-box {
-  color: black;
-  margin-top: 10vh;
-  background: rgb(196, 196, 202);
+.refresh-icon {
+  margin: 1vh;
 }
