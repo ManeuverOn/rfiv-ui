@@ -8,6 +8,7 @@ export const FormBox = ({
   handleSubmit,
   handleChange,
   feedback,
+  buttonLabel,
   fields,
 }) => {
   const formFields = fields.map((field, index) => (
@@ -29,7 +30,7 @@ export const FormBox = ({
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       {formFields}
-      <Button type="submit">Submit</Button>
+      <Button type="submit">{buttonLabel}</Button>
     </Form>
   );
 };

@@ -80,6 +80,7 @@ export const Edit = ({ history, match }) => {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             feedback={"Missing Field."}
+            buttonLabel={"Save Changes"}
             fields={[
               { label: "Name", name: "name", value: state.name },
               { label: "Tag ID", name: "tagId", value: state.tagId },

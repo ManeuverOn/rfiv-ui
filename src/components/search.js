@@ -55,11 +55,7 @@ export const Search = ({ history }) => {
   const ResultsTable = ({ results }) => {
     const resTable = results.map((r, i) => {
       return (
-        <tr
-          key={i}
-          role="button"
-          onClick={() => handleClick(r.id)}
-        >
+        <tr key={i} role="button" onClick={() => handleClick(r.id)}>
           <td>{r.name}</td>
           <td>{r.id}</td>
           <td>{r.tagId}</td>
@@ -95,6 +91,7 @@ export const Search = ({ history }) => {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             feedback={"Please provide at least one field."}
+            buttonLabel={"Search"}
             fields={[
               { label: "Name", name: "name", value: state.name },
               { label: "Patient ID", name: "id", value: state.id },
