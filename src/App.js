@@ -6,6 +6,7 @@ import { Landing } from "./components/landing";
 import { Search } from "./components/search";
 import { Add } from "./components/add";
 import { Patient } from "./components/patient";
+import { Edit } from "./components/edit";
 
 export const App = () => {
   // loads the header bar and the component requested for according to the URL
@@ -16,6 +17,7 @@ export const App = () => {
       <Route path="/search" component={Search} />
       <Route path="/add" component={Add} />
       <Route path="/patient/:id" component={Patient} />
+      <Route path="/edit/:id" component={Edit} />
     </BrowserRouter>
   );
 };

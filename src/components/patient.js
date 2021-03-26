@@ -1,6 +1,6 @@
 import "../css/App.css";
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -14,7 +14,6 @@ export const Patient = ({ match }) => {
     id: "",
     tagId: "",
   });
-
   // patient location history
   let [locations, setLocations] = useState([]);
 
@@ -41,19 +40,6 @@ export const Patient = ({ match }) => {
     getPatient();
   }, [getPatient]);
 
-  // Icon for refreshing info on page
-  const RefreshIcon = () => {
-    return (
-      <div className="refresh-icon">
-        <Row className="justify-content-md-center">
-          <Link to={`/patient/${match.params.id}`} onClick={getPatient}>
-            <SyncIcon size="medium" />
-          </Link>
-        </Row>
-      </div>
-    );
-  };
-
   // component for displaying patient's info
   const PatientInfo = ({ info, locHistory }) => {
     let lastLocation = "";
@@ -65,6 +51,9 @@ export const Patient = ({ match }) => {
 
     return (
       <Container>
+        <Row className="justify-content-end">
+          <Link to={`/edit/${match.params.id}`}>Edit Patient Info</Link>
+        </Row>
         <Table>
           <tbody>
             <tr>
@@ -86,6 +75,19 @@ export const Patient = ({ match }) => {
           </tbody>
         </Table>
       </Container>
+    );
+  };
+
+  // Icon for refreshing info on page
+  const RefreshIcon = () => {
+    return (
+      <div>
+        <Row className="justify-content-center">
+          <Link to="#" onClick={getPatient}>
+            <SyncIcon size="medium" />
+          </Link>
+        </Row>
+      </div>
     );
   };
 
@@ -120,8 +122,8 @@ export const Patient = ({ match }) => {
   return (
     <div className="App">
       <div className="background">
-        <RefreshIcon />
         <PatientInfo info={state} locHistory={locations} />
+        <RefreshIcon />
         <LocationTable locHistory={locations} />
       </div>
     </div>
