@@ -1,6 +1,7 @@
 import "../css/App.css";
 
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { FormBox } from "./shared";
 
 export const Edit = ({ history, match }) => {
@@ -86,6 +87,10 @@ export const Edit = ({ history, match }) => {
               { label: "Tag ID", name: "tagId", value: state.tagId },
             ]}
           />
+          <div style={{ marginTop: "1vh" }}>
+            <Link to={`/patient/${state.id}`}>Cancel</Link>
+          </div>
+
           <div className="error-message">{errorMsg}</div>
         </div>
       </div>
