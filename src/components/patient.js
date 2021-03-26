@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
 import { SyncIcon } from "@primer/octicons-react";
+import { CSVLink } from "react-csv";
 
 export const Patient = ({ match }) => {
   // patient info
@@ -90,7 +91,7 @@ export const Patient = ({ match }) => {
   };
 
   // component for displaying patient's location history
-  const LocationTable = ({ locHistory }) => {
+  const LocationTable = ({ info, locHistory }) => {
     const locTable = [];
     for (let i = locHistory.length - 1; i >= 0; i--) {
       locTable.push(
@@ -103,6 +104,14 @@ export const Patient = ({ match }) => {
 
     return (
       <div className="table-box">
+        <Row className="justify-content-end" style={{ margin: "auto" }}>
+          <CSVLink
+            data={[["time", "location"]].concat(locHistory)}
+            filename={`location-history-${info.id}`}
+          >
+            Export to CSV
+          </CSVLink>
+        </Row>
         <Table hidden={locTable.length === 0} size="sm" striped bordered hover>
           <thead>
             <tr>
@@ -122,7 +131,7 @@ export const Patient = ({ match }) => {
       <div className="background">
         <PatientInfo info={state} locHistory={locations} />
         <RefreshIcon />
-        <LocationTable locHistory={locations} />
+        <LocationTable info={state} locHistory={locations} />
       </div>
     </div>
   );
