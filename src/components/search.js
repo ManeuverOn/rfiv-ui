@@ -90,8 +90,8 @@ export const Search = ({ history }) => {
             validated={validated}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
-            feedback={"Please provide at least one field."}
-            buttonLabel={"Search"}
+            feedback="Please provide at least one field."
+            buttonLabel="Search"
             fields={[
               { label: "Name", name: "name", value: state.name },
               { label: "Patient ID", name: "id", value: state.id },

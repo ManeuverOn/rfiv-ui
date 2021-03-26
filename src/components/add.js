@@ -60,8 +60,8 @@ export const Add = () => {
             validated={validated}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
-            feedback={"Missing Field."}
-            buttonLabel={"Add Patient"}
+            feedback="Missing Field."
+            buttonLabel="Add Patient"
             fields={[
               { label: "Name", name: "name", value: state.name },
               { label: "Patient ID", name: "id", value: state.id },

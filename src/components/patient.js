@@ -92,6 +92,7 @@ export const Patient = ({ match }) => {
 
   // component for displaying patient's location history
   const LocationTable = ({ info, locHistory }) => {
+    // table of locations
     const locTable = [];
     for (let i = locHistory.length - 1; i >= 0; i--) {
       locTable.push(
@@ -102,15 +103,20 @@ export const Patient = ({ match }) => {
       );
     }
 
+    // link to export to CSV
+    const csvLink = (
+      <CSVLink
+        data={[["time", "location"]].concat(locHistory)}
+        filename={`location-history-${info.id}`}
+      >
+        Export to CSV
+      </CSVLink>
+    );
+
     return (
       <div className="table-box">
         <Row className="justify-content-end" style={{ margin: "auto" }}>
-          <CSVLink
-            data={[["time", "location"]].concat(locHistory)}
-            filename={`location-history-${info.id}`}
-          >
-            Export to CSV
-          </CSVLink>
+          {csvLink}
         </Row>
         <Table hidden={locTable.length === 0} size="sm" striped bordered hover>
           <thead>
