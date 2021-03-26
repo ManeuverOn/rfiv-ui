@@ -114,15 +114,11 @@ export const Patient = ({ match }) => {
     );
 
     return (
-      <div className="table-box">
-        <Row
-          className="justify-content-end"
-          style={{ margin: "auto" }}
-          hidden={locTable.length === 0}
-        >
+      <div className="table-box" hidden={locTable.length === 0}>
+        <Row className="justify-content-end" style={{ margin: "auto" }}>
           {csvLink}
         </Row>
-        <Table hidden={locTable.length === 0} size="sm" striped bordered hover>
+        <Table size="sm" striped bordered hover>
           <thead>
             <tr>
               <th>Time</th>

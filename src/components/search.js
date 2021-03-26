@@ -63,8 +63,8 @@ export const Search = ({ history }) => {
       );
     });
     return (
-      <div className="table-box">
-        <Table hidden={results.length === 0} striped bordered hover>
+      <div className="table-box" hidden={results.length === 0}>
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>Name</th>
