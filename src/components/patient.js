@@ -82,11 +82,9 @@ export const Patient = ({ match }) => {
   const RefreshIcon = () => {
     return (
       <div>
-        <Row className="justify-content-center">
-          <Link to="#" onClick={getPatient}>
-            <SyncIcon size="medium" />
-          </Link>
-        </Row>
+        <Link to="#" onClick={getPatient}>
+          <SyncIcon size="small" />
+        </Link>
       </div>
     );
   };
