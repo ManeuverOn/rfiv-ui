@@ -1,8 +1,7 @@
 import "../css/App.css";
 
 import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { FormBox } from "./shared";
 
 export const Add = () => {
   // notify user of invalid input
@@ -57,52 +56,17 @@ export const Add = () => {
       <div className="background">
         <div className="form-box">
           <p className="big-label">Add a patient:</p>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                autoFocus
-                required
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={state.name}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide the patient's name.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Patient ID</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Patient ID"
-                name="id"
-                value={state.id}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide the patient's ID.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Tag ID</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Tag ID"
-                name="tagId"
-                value={state.tagId}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide the tag ID.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button type="submit">Submit</Button>
-          </Form>
+          <FormBox
+            validated={validated}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            feedback={"Missing Field."}
+            fields={[
+              { label: "Name", name: "name", value: state.name },
+              { label: "Patient ID", name: "id", value: state.id },
+              { label: "Tag ID", name: "tagId", value: state.tagId },
+            ]}
+          />
           <div className="error-message">{errorMsg}</div>
           <div className="success-message">{successMsg}</div>
         </div>

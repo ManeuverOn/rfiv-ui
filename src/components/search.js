@@ -1,13 +1,12 @@
 import "../css/App.css";
 
 import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import { FormBox } from "./shared";
 
 export const Search = ({ history }) => {
   // notify user of invalid input
-  let [invalid, setInvalid] = useState(false);
+  let [validated, setValidated] = useState(false);
   // save user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   // error status of searching for patient
@@ -18,7 +17,7 @@ export const Search = ({ history }) => {
   // handles saving changes on form input
   const handleChange = (ev) => {
     setState({ ...state, [ev.target.name]: ev.target.value });
-    setInvalid(false);
+    setValidated(false);
   };
 
   // handles search for patients in database
@@ -43,12 +42,12 @@ export const Search = ({ history }) => {
       // all fields empty
       setPatientList([]);
       setErrorMsg("");
-      setInvalid(true);
+      setValidated(true);
     }
   };
 
   // handles click to to patient's info page from search results
-  const handleClick = (name, id, tagId) => {
+  const handleClick = (id) => {
     history.push(`/patient/${id}`);
   };
 
@@ -59,7 +58,7 @@ export const Search = ({ history }) => {
         <tr
           key={i}
           role="button"
-          onClick={() => handleClick(r.name, r.id, r.tagId)}
+          onClick={() => handleClick(r.id)}
         >
           <td>{r.name}</td>
           <td>{r.id}</td>
@@ -91,52 +90,17 @@ export const Search = ({ history }) => {
           <p className="big-label">
             Search for a patient by one or more fields:
           </p>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                autoFocus
-                isInvalid={invalid}
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={state.name}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide at least one field.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Patient ID</Form.Label>
-              <Form.Control
-                isInvalid={invalid}
-                type="text"
-                placeholder="Patient ID"
-                name="id"
-                value={state.id}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide at least one field.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Tag ID</Form.Label>
-              <Form.Control
-                isInvalid={invalid}
-                type="text"
-                placeholder="Tag ID"
-                name="tagId"
-                value={state.tagId}
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide at least one field.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button type="submit">Submit</Button>
-          </Form>
+          <FormBox
+            validated={validated}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            feedback={"Please provide at least one field."}
+            fields={[
+              { label: "Name", name: "name", value: state.name },
+              { label: "Patient ID", name: "id", value: state.id },
+              { label: "Tag ID", name: "tagId", value: state.tagId },
+            ]}
+          />
           <div className="error-message">{errorMsg}</div>
         </div>
         <ResultsTable results={patientList} />
