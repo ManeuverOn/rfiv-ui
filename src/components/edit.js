@@ -90,7 +90,6 @@ export const Edit = ({ history, match }) => {
           <div style={{ marginTop: "1vh" }}>
             <Link to={`/patient/${state.id}`}>Cancel</Link>
           </div>
-
           <div className="error-message">{errorMsg}</div>
         </div>
       </div>
