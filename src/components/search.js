@@ -2,6 +2,7 @@ import "../css/App.css";
 
 import { useState } from "react";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 import { FormBox } from "./shared";
 
 export const Search = ({ history }) => {
@@ -98,6 +99,14 @@ export const Search = ({ history }) => {
               { label: "Tag ID", name: "tagId", value: state.tagId },
             ]}
           />
+          <div style={{ marginTop: "1vh" }}>
+            <Link
+              to="#"
+              onClick={() => setState({ name: "", id: "", tagId: "" })}
+            >
+              Clear Form
+            </Link>
+          </div>
           <div className="error-message">{errorMsg}</div>
         </div>
         <ResultsTable results={patientList} />
