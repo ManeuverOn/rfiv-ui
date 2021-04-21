@@ -22,6 +22,11 @@ export const FormBox = ({
         name={field.name}
         value={field.value}
         onChange={handleChange}
+        onKeyPress={(event) => {
+          if (event.key === "Enter") {
+            event.target.blur();
+          }
+        }}
       />
       <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>
     </Form.Group>
