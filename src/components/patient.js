@@ -83,7 +83,7 @@ export const Patient = ({ match }) => {
   const RefreshIcon = () => {
     return (
       <div>
-        <Link to="#" onClick={getPatient}>
+        <Link to="#" replace onClick={getPatient}>
           <SyncIcon size="small" />
         </Link>
       </div>
