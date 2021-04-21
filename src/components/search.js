@@ -55,9 +55,10 @@ export const Search = ({ history, location }) => {
     ev.preventDefault();
     // make sure at least one field is non-empty
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
-      history.push(
-        `/search?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
-      );
+      const newLocation = `/search?name=${state.name}&id=${state.id}&tagId=${state.tagId}`;
+      if (newLocation !== location.pathname + location.search) {
+        history.push(newLocation);
+      }
     } else {
       // all fields empty
       setErrorMsg("");
