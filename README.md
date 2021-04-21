@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Setup
 
 `Note`: Node.js is required to run this code. Download it at https://nodejs.org/en/.
 
