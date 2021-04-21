@@ -1,11 +1,10 @@
 import "../css/App.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
 import { FormBox } from "./shared";
 
-export const Search = ({ history }) => {
+export const Search = ({ history, location }) => {
   // notify user of invalid input
   let [validated, setValidated] = useState(false);
   // save user's form input
@@ -14,6 +13,36 @@ export const Search = ({ history }) => {
   let [errorMsg, setErrorMsg] = useState("");
   // save patient list from search results
   let [patientList, setPatientList] = useState([]);
+
+  // load search query from URL when page loads
+  useEffect(() => {
+    const getSearchQuery = async () => {
+      // if URL query is not empty, load the search query
+      if (location.search !== "") {
+        const res = await fetch(
+          `http://localhost:8080/v1/patients${location.search}`
+        );
+        const data = await res.json();
+        if (res.ok) {
+          // patient found
+          setErrorMsg("");
+          setPatientList(data.patients);
+        } else {
+          // error when searching for patient
+          setErrorMsg(data.error);
+          setPatientList([]);
+        }
+        // load the search query into the search form
+        setState({ ...{ name: "", id: "", tagId: "" }, ...data.query });
+      } else {
+        setValidated(false);
+        setState({ name: "", id: "", tagId: "" });
+        setErrorMsg("");
+        setPatientList([]);
+      }
+    };
+    getSearchQuery();
+  }, [location.search]);
 
   // handles saving changes on form input
   const handleChange = (ev) => {
@@ -26,22 +55,11 @@ export const Search = ({ history }) => {
     ev.preventDefault();
     // make sure at least one field is non-empty
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
-      const res = await fetch(
-        `http://localhost:8080/v1/patients?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
+      history.push(
+        `/search?name=${state.name}&id=${state.id}&tagId=${state.tagId}`
       );
-      const data = await res.json();
-      if (res.ok) {
-        // patient found
-        setErrorMsg("");
-        setPatientList(data);
-      } else {
-        // error when searching for patient
-        setErrorMsg(data.error);
-        setPatientList([]);
-      }
     } else {
       // all fields empty
-      setPatientList([]);
       setErrorMsg("");
       setValidated(true);
     }
@@ -99,14 +117,6 @@ export const Search = ({ history }) => {
               { label: "Tag ID", name: "tagId", value: state.tagId },
             ]}
           />
-          <div style={{ marginTop: "1vh" }}>
-            <Link
-              to="#"
-              onClick={() => setState({ name: "", id: "", tagId: "" })}
-            >
-              Clear Form
-            </Link>
-          </div>
           <div className="error-message">{errorMsg}</div>
         </div>
         <ResultsTable results={patientList} />
