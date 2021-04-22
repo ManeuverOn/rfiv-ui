@@ -114,19 +114,21 @@ export const Patient = ({ match }) => {
     );
 
     return (
-      <div className="table-box" hidden={locTable.length === 0}>
+      <div>
         <Row className="justify-content-end" style={{ margin: "auto" }}>
           {csvLink}
         </Row>
-        <Table size="sm" striped bordered hover>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>{locTable}</tbody>
-        </Table>
+        <div className="table-box" hidden={locTable.length === 0}>
+          <Table size="sm" striped bordered hover>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>{locTable}</tbody>
+          </Table>
+        </div>
       </div>
     );
   };

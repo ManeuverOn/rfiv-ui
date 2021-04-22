@@ -35,7 +35,7 @@
   color: black;
   min-height: 50vh;
   min-width: 50vh;
-  padding-top: 10vh;
+  padding: 10vh 0 3vh 0;
 }
 
 .big-label {
@@ -53,7 +53,6 @@
 }
 
 .table-box {
-  margin-top: 3vh;
   height: 75vh;
   overflow: auto;
   min-width: 80vh;
