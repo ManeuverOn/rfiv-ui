@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 `Note`: Node.js is required to run this code. Download it at https://nodejs.org/en/.
 
-In the project directory, you can run:
+In the project directory, run the following commands in the terminal:
 
 ### `npm install`
 
