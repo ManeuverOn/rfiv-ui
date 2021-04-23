@@ -26,11 +26,11 @@ export const Patient = ({ match }) => {
     const data = await res.json();
     if (res.ok) {
       setState({
-        name: data.name,
-        id: data.id,
-        tagId: data.tagId,
+        name: data.patient.name,
+        id: data.patient.id,
+        tagId: data.patient.tagId,
       });
-      setLocations(data.locations);
+      setLocations(data.patient.locations);
     } else {
       console.log(data.error);
     }
@@ -114,11 +114,11 @@ export const Patient = ({ match }) => {
     );
 
     return (
-      <div>
+      <div hidden={locTable.length === 0}>
         <Row className="justify-content-end" style={{ margin: "auto" }}>
           {csvLink}
         </Row>
-        <div className="table-box" hidden={locTable.length === 0}>
+        <div className="table-box">
           <Table size="sm" striped bordered hover>
             <thead>
               <tr>

@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The React components we created are located at [src/components](src/components).
+
 ## Setup
 
 `Note`: Node.js is required to run this code. Download it at https://nodejs.org/en/.

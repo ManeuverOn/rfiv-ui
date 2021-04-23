@@ -25,9 +25,9 @@ export const Edit = ({ history, match }) => {
     const data = await res.json();
     if (res.ok) {
       setState({
-        name: data.name,
-        id: data.id,
-        tagId: data.tagId,
+        name: data.patient.name,
+        id: data.patient.id,
+        tagId: data.patient.tagId,
       });
     } else {
       setErrorMsg(data.error);

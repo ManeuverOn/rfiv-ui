@@ -17,7 +17,7 @@ export const Search = ({ history, location }) => {
   // load search query from URL when page loads
   useEffect(() => {
     const getSearchQuery = async () => {
-      // if URL query is not empty, load the search query
+      // if search query in URL is not empty, load the search query
       if (location.search !== "") {
         const res = await fetch(
           `http://localhost:8080/v1/patients${location.search}`
