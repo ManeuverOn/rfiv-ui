@@ -1,3 +1,4 @@
+/* Implements component for navigation bar at the top of each page */
 import logo from "../images/rfiv.svg";
 
 import React from "react";
@@ -5,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 
 export const Header = () => {
-  // return header bar with navigation links
+  // return header bar with navigation links for landing, search, and add patient pages
   const location = useLocation();
   return (
     <Navbar bg="dark" variant="dark">

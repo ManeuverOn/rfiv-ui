@@ -1,3 +1,4 @@
+/* Implements component for app landing page */
 import logo from "../images/rfiv.svg";
 import "../css/App.css";
 
@@ -8,9 +9,9 @@ export const Landing = () => {
       <header className="background">
         <img src={logo} className="logo" alt="logo" />
         <div className="large-text">
-          Welcome to the RFIV tracking web app. Use the Navbar at the top to
-          test the different functions. <b>Search</b> for a patient by name or
-          ID and <b>Add</b> a patient to the database.
+          Welcome to the RFIV tracking web app. Use the Navigation bar at the
+          top to test the different features. <b>Search</b> for a patient by
+          name, ID, or tag ID and <b>Add</b> a patient to the database.
         </div>
       </header>
     </div>

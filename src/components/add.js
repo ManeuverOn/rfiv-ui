@@ -1,12 +1,13 @@
+/* Implements component for page to add patients to database */
 import "../css/App.css";
 
 import { useState } from "react";
 import { FormBox } from "./shared";
 
 export const Add = () => {
-  // notify user of invalid input
+  // whether user's form input is invalid and should be notified
   let [validated, setValidated] = useState(false);
-  // save user's form input
+  // user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   // error status of adding patient
   let [errorMsg, setErrorMsg] = useState("");
@@ -21,8 +22,8 @@ export const Add = () => {
   // handle submitting form to add patient to database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    // check that all fields are non-empty
     if (ev.currentTarget.checkValidity()) {
+      // check that all fields are non-empty
       const res = await fetch("http://localhost:8080/v1/patient", {
         method: "POST",
         body: JSON.stringify(state),

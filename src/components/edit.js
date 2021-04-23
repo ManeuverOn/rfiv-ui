@@ -1,3 +1,4 @@
+/* Implements component for page to edit a patient's info */
 import "../css/App.css";
 
 import { useState, useEffect, useCallback } from "react";
@@ -5,9 +6,9 @@ import { Link } from "react-router-dom";
 import { FormBox } from "./shared";
 
 export const Edit = ({ history, match }) => {
-  // notify user of invalid input
+  // whether user's form input is invalid and should be notified
   let [validated, setValidated] = useState(true);
-  // save user's form input
+  // user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   // error status of editing patient info
   let [errorMsg, setErrorMsg] = useState("");
@@ -24,12 +25,14 @@ export const Edit = ({ history, match }) => {
     );
     const data = await res.json();
     if (res.ok) {
+      // patient document exists
       setState({
         name: data.patient.name,
         id: data.patient.id,
         tagId: data.patient.tagId,
       });
     } else {
+      // patient not found
       setErrorMsg(data.error);
     }
   }, [match.params.id]);
@@ -42,8 +45,8 @@ export const Edit = ({ history, match }) => {
   // handles editing patient info in database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    // make sure at least one field is non-empty
     if (ev.currentTarget.checkValidity()) {
+      // make sure at least one field is non-empty
       const res = await fetch(
         `http://localhost:8080/v1/patient/${match.params.id}`,
         {

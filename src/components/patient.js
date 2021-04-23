@@ -1,3 +1,4 @@
+/* Implements component for patient info page */
 import "../css/App.css";
 
 import { useState, useEffect, useCallback } from "react";
@@ -10,11 +11,7 @@ import { CSVLink } from "react-csv";
 
 export const Patient = ({ match }) => {
   // patient info
-  let [state, setState] = useState({
-    name: "",
-    id: "",
-    tagId: "",
-  });
+  let [state, setState] = useState({ name: "", id: "", tagId: "" });
   // patient location history
   let [locations, setLocations] = useState([]);
 
@@ -25,6 +22,7 @@ export const Patient = ({ match }) => {
     );
     const data = await res.json();
     if (res.ok) {
+      // patient document exists
       setState({
         name: data.patient.name,
         id: data.patient.id,
@@ -32,6 +30,7 @@ export const Patient = ({ match }) => {
       });
       setLocations(data.patient.locations);
     } else {
+      // patient not found
       console.log(data.error);
     }
   }, [match.params.id]);
@@ -41,10 +40,11 @@ export const Patient = ({ match }) => {
     getPatient();
   }, [getPatient]);
 
-  // component for displaying patient's info
+  // component for displaying table of patient's info
   const PatientInfo = ({ info, locHistory }) => {
     let lastLocation = "";
     if (locHistory.length > 0) {
+      // get last known location, if it exists
       const lastEntry = locHistory[locHistory.length - 1];
       lastLocation =
         lastEntry[1] + " at " + new Date(lastEntry[0]).toLocaleString();
@@ -90,7 +90,7 @@ export const Patient = ({ match }) => {
     );
   };
 
-  // component for displaying patient's location history
+  // component for displaying table of patient's location history
   const LocationTable = ({ info, locHistory }) => {
     // table of locations
     const locTable = [];
@@ -133,7 +133,7 @@ export const Patient = ({ match }) => {
     );
   };
 
-  // return patient location and location history
+  // return patient location and location history components
   return (
     <div className="App">
       <div className="background">

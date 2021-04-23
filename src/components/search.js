@@ -1,3 +1,4 @@
+/* Implements component for page to search for patients in database */
 import "../css/App.css";
 
 import { useState, useEffect } from "react";
@@ -5,9 +6,9 @@ import Table from "react-bootstrap/Table";
 import { FormBox } from "./shared";
 
 export const Search = ({ history, location }) => {
-  // notify user of invalid input
+  // whether user's form input is invalid and should be notified
   let [validated, setValidated] = useState(false);
-  // save user's form input
+  // user's form input
   let [state, setState] = useState({ name: "", id: "", tagId: "" });
   // error status of searching for patient
   let [errorMsg, setErrorMsg] = useState("");
@@ -17,8 +18,8 @@ export const Search = ({ history, location }) => {
   // load search query from URL when page loads
   useEffect(() => {
     const getSearchQuery = async () => {
-      // if search query in URL is not empty, load the search query
       if (location.search !== "") {
+        // if search query in URL is not empty, load the search query
         const res = await fetch(
           `http://localhost:8080/v1/patients${location.search}`
         );
@@ -35,6 +36,7 @@ export const Search = ({ history, location }) => {
         // load the search query into the search form
         setState({ ...{ name: "", id: "", tagId: "" }, ...data.query });
       } else {
+        // no search query, show default empty search form
         setValidated(false);
         setState({ name: "", id: "", tagId: "" });
         setErrorMsg("");
@@ -53,10 +55,11 @@ export const Search = ({ history, location }) => {
   // handles search for patients in database
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    // make sure at least one field is non-empty
     if (state.name !== "" || state.id !== "" || state.tagId !== "") {
+      // make sure at least one field is non-empty
       const newLocation = `/search?name=${state.name}&id=${state.id}&tagId=${state.tagId}`;
       if (newLocation !== location.pathname + location.search) {
+        // only search if current query is different from the previous one
         history.push(newLocation);
       }
     } else {
@@ -66,7 +69,7 @@ export const Search = ({ history, location }) => {
     }
   };
 
-  // handles click to to patient's info page from search results
+  // handles clicking a patient in the search results
   const handleClick = (id) => {
     history.push(`/patient/${id}`);
   };
