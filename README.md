@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The React components we created are located at [src/components](src/components).
+This code implements the user interface for the RFIV tracking app. The React components we created are located at [src/components](src/components). The routing between different pages of the app is handled by [src/App.js](src/App.js).
 
 ## Setup
 
